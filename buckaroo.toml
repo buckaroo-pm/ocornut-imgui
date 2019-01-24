@@ -1,0 +1,16 @@
+targets = [ "//:imgui" ]
+
+[[dependency]]
+package = "github.com/buckaroo-pm/glfw"
+version = "branch=master"
+private = true
+
+[[dependency]]
+package = "github.com/buckaroo-pm/host-opengl"
+version = "branch=master"
+private = true
+
+[[dependency]]
+package = "github.com/buckaroo-pm/pkg-config-gl"
+version = "branch=master"
+private = true

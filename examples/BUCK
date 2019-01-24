@@ -1,0 +1,59 @@
+load('//:buckaroo_macros.bzl', 'buckaroo_deps_from_package')
+
+host_opengl = buckaroo_deps_from_package('github.com/buckaroo-pm/host-opengl')
+
+pkg_config_gl = buckaroo_deps_from_package('github.com/buckaroo-pm/pkg-config-gl')
+
+glfw = buckaroo_deps_from_package('github.com/buckaroo-pm/glfw')
+
+cxx_binary(
+  name = 'null',
+  srcs = [
+    'example_null/main.cpp',
+  ],
+  deps = [
+    '//:demo',
+  ],
+)
+
+cxx_binary(
+  name = 'glfw-opengl3',
+  header_namespace = '',
+  headers = [
+    'imgui_impl_glfw.h',
+    'imgui_impl_opengl3.h',
+  ],
+  srcs = [
+    'example_glfw_opengl3/main.cpp',
+    'imgui_impl_opengl3.cpp',
+    'imgui_impl_glfw.cpp',
+  ],
+  deps = glfw + [
+    '//:demo',
+  ],
+  platform_deps = [
+    ('macos.*', host_opengl),
+    ('linux.*', pkg_config_gl)
+  ],
+)
+
+cxx_binary(
+  name = 'glfw-opengl2',
+  header_namespace = '',
+  headers = [
+    'imgui_impl_glfw.h',
+    'imgui_impl_opengl2.h',
+  ],
+  srcs = [
+    'example_glfw_opengl2/main.cpp',
+    'imgui_impl_opengl2.cpp',
+    'imgui_impl_glfw.cpp',
+  ],
+  deps = glfw + [
+    '//:demo',
+  ],
+  platform_deps = [
+    ('macos.*', host_opengl),
+    ('linux.*', pkg_config_gl)
+  ],
+)
